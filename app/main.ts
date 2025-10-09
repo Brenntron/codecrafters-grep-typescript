@@ -6,6 +6,10 @@ const inputLine: string = await Bun.stdin.text();
 function matchPattern(inputLine: string, pattern: string): boolean {
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
+  } else if (pattern.startsWith('[') && pattern.endsWith(']')) {
+    const substringToMatch = pattern.slice(1, pattern.length - 1)
+
+    return inputLine.split('').some((char) => substringToMatch.includes(char));
   }
 
   switch (pattern) {
