@@ -6,10 +6,15 @@ const inputLine: string = await Bun.stdin.text();
 function matchPattern(inputLine: string, pattern: string): boolean {
   if (pattern.length === 1) {
     return inputLine.includes(pattern);
-  } else if (pattern === '\\d') {
-    return inputLine.split('').some((char) => char >= '0' && char <= '9');
-  } else {
-    throw new Error(`Unhandled pattern: ${pattern}`);
+  }
+
+  switch (pattern) {
+    case '\\d':
+      return inputLine.split('').some((char) => char >= '0' && char <= '9');
+    case '\\w':
+      return inputLine.split('').some((char) => (char.toLowerCase() >= 'a' && char.toLowerCase() <= 'z') || (char >= '0' && char <= '9') || char === '_');
+    default:
+      throw new Error(`Unhandled pattern: ${pattern}`);
   }
 }
 
