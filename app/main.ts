@@ -90,7 +90,9 @@ if (args[2] !== "-E") {
 }
 
 if (matchPattern(inputLine, pattern)) {
+  console.log("Matched");
   process.exit(0);
 } else {
+  console.log("Not Matched");
   process.exit(1);
 }
